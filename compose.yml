@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: ./myproject
+    environment:
+      username: maahin
+      password: admin
+      host: postgres
+    volumes:
+      - ./myproject:/usr/src/app
+    ports:
+      - 8989:4000
+  postgres:
+    image: postgres:alpine3.19
+    container_name: postgres
+    ports: 
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: maahin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+volumes:
+  postgres_data:
